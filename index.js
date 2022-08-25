@@ -10,7 +10,7 @@ const date = new Date();
 
 // 온도 측정
 getWeatherData({ mode: "lastUpdate" }).then((data) => {
-  div.innerHTML = `현재 온도는 <mark>${data[8]}℃</mark>입니다.`;
+  div.innerHTML = `현재 기온은 <mark>${data[8]}℃</mark>입니다.`;
   small.innerHTML = `${data[0]}시에 마지막 업데이트. 옥포조선소 기준 <a class="contrast" href="http://www.kma.go.kr/cgi-bin/aws/nph-aws_txt_min?0&0&MINDB_01M&294&a">(더보기)</a>`;
   lastupdate.appendChild(div);
   lastupdate.appendChild(small);
