@@ -1,10 +1,13 @@
 import { getWeatherData } from "./weather.js";
+import { csvParser } from "./domParser.js";
 
 const searchForm = document.querySelector("#search-form");
 const lastupdate = document.getElementById("lastupdate");
 const cards = document.getElementById("cards");
 const div = document.createElement("div");
 const small = document.createElement("small");
+
+const date = new Date();
 
 // 온도 측정
 getWeatherData({ mode: "lastUpdate" }).then((data) => {
@@ -15,9 +18,79 @@ getWeatherData({ mode: "lastUpdate" }).then((data) => {
   lastupdate.ariaBusy = "false";
 });
 
+//버스 알림 노출
+const getBusFilter = async (week, leave, hour, destination) => {
+  const data = await fetch("./src/neungpo.csv");
+  const text = await data.text();
+  const csv = csvParser(text);
+  const filter = [];
+  csv.forEach((row) => {
+    //평주,구분,시간,분,출발
+    if (row[0] === week && row[1] === leave && String(row[2]) === hour && row[5] === destination) {
+      filter.push(row);
+    }
+  });
+  return filter;
+};
+
+const paintBusData = (filteredData, week, leave, hour, destination) => {
+  const article = document.createElement("article");
+  article.id = "bus-card";
+  article.style = "order:-1";
+
+  //필터된 버스 출력
+  let innerTable = `<header>
+  <i class="fa-solid fa-bus"></i>
+  ${week} ${leave} ${hour}시대 ${destination}행 버스 알림</header>
+  <table><thead><tr><td>시</td><td>분</td><td>출발지</td></tr></thead><tbody>`;
+  filteredData.forEach((list) => {
+    const tr = `<tr>
+        <td class="td-narrow">${list[2]}</td>
+        <td class="td-narrow">${list[3]}</td>
+        <td>${list[4]}</td>
+    </tr>`;
+    innerTable += tr;
+  });
+  innerTable += "</tbody></table>";
+  article.innerHTML = innerTable;
+  cards.prepend(article);
+};
+
+//버스 알림 조건 타이머
+const dest = "능포"; //현재 기본값
+let week;
+if (date.getDay() >= 6) {
+  // week = "주말";
+  week = "평일";
+} else {
+  week = "평일";
+}
+
+if (date.getHours() >= 0) {
+  getBusFilter(week, "퇴근", "20", dest).then((x) => {
+    getBusFilter(week, "퇴근", "21", dest).then((y) => {
+      getBusFilter(week, "퇴근", "22", dest).then((z) => {
+        const result = [];
+        result.push(...x, ...y, ...z);
+        paintBusData(result, week, "퇴근", "21, 22, 23", dest);
+      });
+    });
+  });
+} else if (date.getHours() >= 19) {
+  getBusFilter(week, "퇴근", "19", dest).then((result) => {
+    paintBusData(result, week, "퇴근", "19", dest);
+  });
+} else if (date.getHours() >= 18) {
+  getBusFilter(week, "퇴근", "18", dest).then((result) => {
+    paintBusData(result, week, "퇴근", "18", dest);
+  });
+} else if (date.getHours() >= 16) {
+  getBusFilter(week, "퇴근", "17", dest).then((result) => {
+    paintBusData(result, week, "퇴근", "17", dest);
+  });
+}
 // 정각 알림
-const date = new Date();
-console.log(date.getHours());
+
 if (date.getHours() === 12) {
   getWeatherData({ mode: "check", value: "00:00" }).then((data) => {
     console.log(data);

@@ -12,3 +12,13 @@ export const getInnerTag = (text, tag) => {
     return result;
   }
 };
+
+export const csvParser = (csvContent) => {
+  const rows = csvContent.split("\n");
+  const result = [];
+  rows.forEach((row) => {
+    const cols = row.split(",");
+    result.push(cols);
+  });
+  return result;
+};
