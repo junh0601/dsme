@@ -94,14 +94,14 @@ if ((hour >= 19 && min >= 30) || hour >= 20) {
 }
 
 // 정오 연장 알림 (4~10월 사이에만 작동)
-if (hour === 2 && month >= 4 && month <= 10) {
+if (hour === 12 && month >= 4 && month <= 10) {
   const article = document.createElement("article");
   const cards = document.getElementById("cards");
   article.style = "order:-1;";
   article.innerHTML = ` 점심 시간 점심시간 연장 여부 조회중`;
   article.ariaBusy = "true";
   cards.appendChild(article);
-  getWeatherData({ mode: "check", value: "02:00" }).then((data) => {
+  getWeatherData({ mode: "check", value: "12:00" }).then((data) => {
     if (data !== null) {
       let msg = "";
       if (parseFloat(data[0]) >= 31.5) {
