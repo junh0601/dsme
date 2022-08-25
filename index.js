@@ -123,6 +123,8 @@ if (hour === 12 && month >= 4 && month <= 10) {
             </div>
           </small>
         </footer>`;
+    } else {
+      article.innerHTML = "아직 조회되지 않습니다.";
     }
     article.ariaBusy = "false";
   });
