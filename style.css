@@ -33,3 +33,8 @@ article > header {
   overflow: auto;
   max-height: 300px;
 }
+
+#notice-card > header {
+  display: flex;
+  justify-content: space-between;
+}
