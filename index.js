@@ -130,3 +130,6 @@ const handleSearch = (event) => {
 };
 
 searchForm.addEventListener("submit", handleSearch);
+
+const lastcard = document.getElementById("last-card");
+lastcard.innerText = date.getHours();
