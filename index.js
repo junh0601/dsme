@@ -113,10 +113,10 @@ if (hour === 2 && month >= 4 && month <= 10) {
       }
       article.innerHTML = `
         <header>🚨 점심 시간 <mark>${msg}</mark></header>
-        <center><h2> ${data[8]}C° </h2><center>
+        <center><h2> ${data[8]}C° </h2></center>
         <footer>
           <small>
-            <div><i class="fa-solid fa-info"></i> 연장 기준은 28도 이상은 30분 연장, 31.5도 이상은 1시간 연장</div>
+            <div><i class="fa-solid fa-info"></i> 연장 기준은 28도 이상은 30분 연장, 31.5도 이상은 1시간 연장 (12시 정각 온도)</div>
             <div>
               <i class="fa-solid fa-info"></i> <a href="http://www.kma.go.kr/cgi-bin/aws/nph-aws_txt_min?0&0&MINDB_01M&294&a" target="_blank">공공데이터</a>를 기반으로 한 결과이며, 정확한 결과는
               회사 공지를 확인해주세요.
