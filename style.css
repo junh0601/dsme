@@ -28,3 +28,8 @@ td {
 article > header {
   font-weight: bold;
 }
+
+#bus-card > div {
+  overflow: auto;
+  max-height: 300px;
+}

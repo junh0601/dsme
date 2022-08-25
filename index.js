@@ -41,7 +41,7 @@ const paintBusData = (filteredData, week, leave, hour, destination) => {
   //필터된 버스 출력
   let innerTable = `<header>
   <i class="fa-solid fa-bus"></i>
-  ${week} ${leave} ${hour}시대 ${destination}행 버스 알림</header>
+  ${week} ${leave} ${hour}시대 ${destination}행 버스 알림</header><div>
   <table><thead><tr><td>시</td><td>분</td><td>출발지</td></tr></thead><tbody>`;
   filteredData.forEach((list) => {
     const tr = `<tr>
@@ -51,7 +51,7 @@ const paintBusData = (filteredData, week, leave, hour, destination) => {
     </tr>`;
     innerTable += tr;
   });
-  innerTable += "</tbody></table>";
+  innerTable += "</tbody></table><div>";
   article.innerHTML = innerTable;
   cards.prepend(article);
 };
@@ -66,7 +66,7 @@ if (date.getDay() >= 6) {
   week = "평일";
 }
 
-if (date.getHours() >= 0) {
+if (date.getHours() >= 20) {
   getBusFilter(week, "퇴근", "20", dest).then((x) => {
     getBusFilter(week, "퇴근", "21", dest).then((y) => {
       getBusFilter(week, "퇴근", "22", dest).then((z) => {
@@ -80,7 +80,7 @@ if (date.getHours() >= 0) {
   getBusFilter(week, "퇴근", "19", dest).then((result) => {
     paintBusData(result, week, "퇴근", "19", dest);
   });
-} else if (date.getHours() >= 18) {
+} else if (date.getHours() >= 0) {
   getBusFilter(week, "퇴근", "18", dest).then((result) => {
     paintBusData(result, week, "퇴근", "18", dest);
   });
