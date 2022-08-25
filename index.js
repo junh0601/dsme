@@ -98,6 +98,7 @@ if (hour === 2 && month >= 4 && month <= 10) {
   const article = document.createElement("article");
   const cards = document.getElementById("cards");
   article.style = "order:-1;";
+  article.innerHTML = ` 점심 시간 점심시간 연장 여부 조회중`;
   article.ariaBusy = "true";
   cards.appendChild(article);
   getWeatherData({ mode: "check", value: "02:00" }).then((data) => {
@@ -111,7 +112,8 @@ if (hour === 2 && month >= 4 && month <= 10) {
         msg = "연장이 아닙니다.";
       }
       article.innerHTML = `
-        <div>🚨 12시 정각 온도는 ${data[8]}C°이며 <mark>${msg}</mark></div>
+        <header>🚨 점심 시간 <mark>${msg}</mark></header>
+        <center><h2> ${data[8]}C° </h2><center>
         <footer>
           <small>
             <div><i class="fa-solid fa-info"></i> 연장 기준은 28도 이상은 30분 연장, 31.5도 이상은 1시간 연장</div>
