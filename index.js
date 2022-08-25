@@ -3,7 +3,6 @@ import { csvParser } from "./domParser.js";
 
 const searchForm = document.querySelector("#search-form");
 const lastupdate = document.getElementById("lastupdate");
-const cards = document.getElementById("cards");
 const div = document.createElement("div");
 const small = document.createElement("small");
 
@@ -59,6 +58,10 @@ const paintBusData = (filteredData, week, leave, hour, destination) => {
 //버스 알림 조건 타이머
 const dest = "능포"; //현재 기본값
 let week;
+const hour = date.getHours();
+const min = date.getMinutes();
+const month = date.getMonth() + 1;
+
 if (date.getDay() >= 6) {
   // week = "주말";
   week = "평일";
@@ -66,7 +69,7 @@ if (date.getDay() >= 6) {
   week = "평일";
 }
 
-if (date.getHours() >= 20) {
+if ((hour >= 19 && min >= 30) || hour >= 20) {
   getBusFilter(week, "퇴근", "20", dest).then((x) => {
     getBusFilter(week, "퇴근", "21", dest).then((y) => {
       getBusFilter(week, "퇴근", "22", dest).then((z) => {
@@ -76,27 +79,29 @@ if (date.getHours() >= 20) {
       });
     });
   });
-} else if (date.getHours() >= 19) {
+} else if ((hour >= 18 && min >= 30) || hour >= 19) {
   getBusFilter(week, "퇴근", "19", dest).then((result) => {
     paintBusData(result, week, "퇴근", "19", dest);
   });
-} else if (date.getHours() >= 0) {
+} else if ((hour >= 17 && min >= 30) || hour >= 18) {
   getBusFilter(week, "퇴근", "18", dest).then((result) => {
     paintBusData(result, week, "퇴근", "18", dest);
   });
-} else if (date.getHours() >= 16) {
+} else if ((hour >= 16 && min >= 30) || hour >= 17) {
   getBusFilter(week, "퇴근", "17", dest).then((result) => {
     paintBusData(result, week, "퇴근", "17", dest);
   });
 }
-// 정각 알림
 
-if (date.getHours() === 12) {
-  getWeatherData({ mode: "check", value: "00:00" }).then((data) => {
-    console.log(data);
+// 정오 연장 알림 (4~10월 사이에만 작동)
+if (hour === 12 && month >= 4 && month <= 10) {
+  const article = document.createElement("article");
+  const cards = document.getElementById("cards");
+  article.style = "order:-1;";
+  article.ariaBusy = "true";
+  cards.appendChild(article);
+  getWeatherData({ mode: "check", value: "12:00" }).then((data) => {
     if (data !== null) {
-      const article = document.createElement("article");
-      article.style = "order:-1;";
       let msg = "";
       if (parseFloat(data[0]) >= 31.5) {
         msg = "1시간 연장입니다.";
@@ -116,8 +121,8 @@ if (date.getHours() === 12) {
             </div>
           </small>
         </footer>`;
-      cards.appendChild(article);
     }
+    article.ariaBusy = "false";
   });
 }
 
@@ -130,6 +135,3 @@ const handleSearch = (event) => {
 };
 
 searchForm.addEventListener("submit", handleSearch);
-
-const lastcard = document.getElementById("last-card");
-lastcard.innerText = date.getHours();
