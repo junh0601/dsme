@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DSME 헬퍼</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="container">
+      
+    <!-- nav  -->
+    <nav id="upper-nav">  
+      <ul>
+        <li>
+          <a href="/" id="logo">
+          <img src="src/dsme-logo.png" , width="70px" /><strong> 헬퍼</strong></li>
+        </a>
+        </ul>
+      <ul>
+        <li>
+          <a href="http://www.kma.go.kr/cgi-bin/aws/nph-aws_txt_min?0&0&MINDB_01M&294&a"></a>
+        </li>
+        <li role="list" dir="rtl">
+          <a href="#" aria-haspopup="listbox">더보기</a>
+          <ul role="listbox">
+            <li><a href="/">홈</a></li>
+            <li><a href="/menu">식당 메뉴(공사중)</a></li>
+            <li><a>버스 노선(공사중)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- searchbar -->
+    <form id="search-form">
+      <input type="search" name="keyword" placeholder="구글 검색" autocomplete="off" />
+    </form>
+    <article id="last-card" style="order: 100">
+      <center><small>현재 시간에 따라 알맞은 카드가 제시됩니다.</small></center>
+    </article>
+
+   <!-- cards -->
+   <div id="cards">
+   <div class="grid">
+      <article>
+        <header><i class="fa-solid fa-temperature-high"></i> 현재 날씨</header>
+        <div id="lastupdate" aria-busy="true"></div>
+      </article>
+   
+    <article style="order: 99">
+      <header><i class="fa-solid fa-circle-exclamation"></i> 공지</header>
+      <div>현재 외부 서버에서 식단을 불러오지 못하는 오류가 있습니다.</div>
+    </article>
+  </div>
+
+  </div>
+  </main>
+    <footer>
+      
+      <center><i class="fa-brands fa-github"></i> <a href="https://github.com/junh0601">github.com/junh0601</a> · 이준혁</center>
+    </footer>
+    <script src="https://kit.fontawesome.com/74b4df4d76.js" crossorigin="anonymous"></script>
+    <script src="index.js" type="module"></script>
+    <script src="domParser.js" type="module"></script>
+    <script src="weather.js" type="module"></script>
+  </body>
+</html>

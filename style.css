@@ -1,0 +1,30 @@
+tr {
+  display: flex;
+  align-items: flex-start;
+}
+
+td {
+  min-width: 200px;
+}
+
+#last-card {
+  padding: 5px;
+  opacity: 0.5;
+}
+#cards {
+  display: flex;
+  flex-direction: column;
+}
+
+#logo {
+  text-decoration: none;
+  color: #bbc6ce;
+}
+
+#link-card > ul {
+  margin-bottom: 5px;
+}
+
+article > header {
+  font-weight: bold;
+}
