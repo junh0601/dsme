@@ -29,6 +29,8 @@ fetchAllMenu().then((x) => {
   timelist.forEach((time) => {
     findMenuOfDate(month, day, time).then((data) => {
       const article = document.createElement("article");
+      const order = { 아침: "order:0;", 점심: "order:1;", 저녁: "order:2;" };
+      article.style = order[time];
       article.className = "menu-card";
       article.innerHTML = printMenu(month, day, week, time, data);
       cards.append(article);
@@ -42,9 +44,12 @@ const handleSelectChange = (e) => {
   const dd = parseInt(dropdown.value.replace(/(.*\/|\(.\))/g, ""));
   const ww = dropdown.value.match(/.(?=\))/)[0];
   title.innerText = `${mm}/${dd}(${ww})  식단표`;
-  ["아침", "점심", "저녁"].forEach((time) => {
+  const timelist = ["아침", "점심", "저녁"];
+  timelist.forEach((time) => {
     findMenuOfDate(mm, dd, time).then((data) => {
       const article = document.createElement("article");
+      const order = { 아침: "order:0;", 점심: "order:1;", 저녁: "order:2;" };
+      article.style = order[time];
       article.className = "menu-card";
       article.innerHTML = printMenu(mm, dd, ww, time, data);
 

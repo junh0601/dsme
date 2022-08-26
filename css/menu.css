@@ -31,3 +31,8 @@ small {
 i {
   margin-right: 5px;
 }
+
+#cards {
+  display: flex;
+  flex-direction: column;
+}
