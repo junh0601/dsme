@@ -48,11 +48,6 @@ article > header {
   width: 200px;
 }
 
-#notice-card > header {
-  display: flex;
-  justify-content: space-between;
-}
-
 #menu-card > div {
   display: flex;
   justify-content: space-around;
