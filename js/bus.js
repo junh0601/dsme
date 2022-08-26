@@ -38,7 +38,7 @@ export const paintBusData = (filteredData, week, leave, hour, destination) => {
       tr = `<tr>
           <td class="td-narrow"><ins>${list[2]}</ins></td>
           <td class="td-narrow"><ins>${list[3]}</ins></td>
-          <td>${list[4]}</td>
+          <td><ins>${list[4]}</ins></td>
         </tr>`;
     } else {
       tr = `<tr>
@@ -50,7 +50,7 @@ export const paintBusData = (filteredData, week, leave, hour, destination) => {
 
     innerTable += tr;
   });
-  innerTable += "</tbody></table><div>";
+  innerTable += "</tbody></table><small><ins>녹색 글씨</ins> 노선은 출발지에서 출발했습니다.</small><div>";
   article.innerHTML = innerTable;
   cards.prepend(article);
 };
