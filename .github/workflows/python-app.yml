@@ -28,7 +28,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run Scraper with python
         run: |
-          python "scrap.py"
+          python "menu.py"
       - name: Commits
         run: |
           git config --local user.email "junh0601@naver.com"
