@@ -4,7 +4,7 @@ tr {
 }
 
 td {
-  min-width: 200px;
+  min-width: 100px;
 }
 
 #search-form {
@@ -43,6 +43,10 @@ article > header {
 #bus-card > div {
   overflow: auto;
   max-height: 300px;
+}
+
+#menu-card > figure > table > tbody > tr > td {
+  width: 200px;
 }
 
 #notice-card > header {

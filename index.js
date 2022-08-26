@@ -125,7 +125,7 @@ if ((hour >= 19 && min >= 30) || hour >= 20) {
 if (hour === 12 && month >= 4 && month <= 10) {
   const article = document.createElement("article");
   const cards = document.getElementById("cards");
-  article.style = "order:-1;";
+  article.style = "order:-2;";
   article.innerHTML = ` 점심 시간 연장 여부 조회중`;
   article.ariaBusy = "true";
   cards.appendChild(article);
