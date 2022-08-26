@@ -31,6 +31,7 @@ export const paintBusData = (filteredData, week, leave, hour, destination) => {
   let innerTable = `<header>
     <i class="fa-solid fa-bus"></i>
     ${week} ${leave} ${hour}시대 <mark>${destination}</mark>행 버스 알림</header><div>
+    <center>
     <table><thead><tr><td>시</td><td>분</td><td>출발지</td></tr></thead><tbody>`;
   filteredData.forEach((list) => {
     let tr;
@@ -50,7 +51,7 @@ export const paintBusData = (filteredData, week, leave, hour, destination) => {
 
     innerTable += tr;
   });
-  innerTable += "</tbody></table><small><ins>녹색 글씨</ins> 노선은 출발지에서 출발했습니다.</small><div>";
+  innerTable += "</tbody></table><small><ins>녹색 글씨</ins> 노선은 출발지에서 출발했습니다.</small></center><div>";
   article.innerHTML = innerTable;
   cards.prepend(article);
 };
