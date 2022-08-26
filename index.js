@@ -2,6 +2,11 @@ import { getWeatherData } from "./weather.js";
 import { csvParser } from "./domParser.js";
 import { findMenuOfDate, printMenu } from "./menu.js";
 
+const url = new URL(window.location.href);
+const params = url.searchParams;
+console.log(url);
+console.log(params);
+
 const searchForm = document.querySelector("#search-form");
 const lastupdate = document.getElementById("lastupdate");
 const div = document.createElement("div");
@@ -120,7 +125,7 @@ if (hour === 12 && month >= 4 && month <= 10) {
   const article = document.createElement("article");
   const cards = document.getElementById("cards");
   article.style = "order:-1;";
-  article.innerHTML = ` 점심 시간 점심시간 연장 여부 조회중`;
+  article.innerHTML = ` 점심 시간 연장 여부 조회중`;
   article.ariaBusy = "true";
   cards.appendChild(article);
   getWeatherData({ mode: "check", value: "12:00" }).then((data) => {
@@ -146,7 +151,7 @@ if (hour === 12 && month >= 4 && month <= 10) {
           </small>
         </footer>`;
     } else {
-      article.innerHTML = "아직 조회되지 않습니다.";
+      article.innerHTML = "점심 연장 여부가 아직 조회되지 않습니다.";
     }
     article.ariaBusy = "false";
   });
