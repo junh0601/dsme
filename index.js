@@ -14,21 +14,22 @@ const day = date.getDate();
 const hour = date.getHours();
 const min = date.getMinutes();
 const month = date.getMonth() + 1;
+const week = ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
 
 // 메뉴 출력
 if (hour >= 19) {
   menuCard.innerHTML = ``;
 } else if (hour >= 13) {
   findMenuOfDate(month, day, "저녁").then((data) => {
-    menuCard.innerHTML = printMenu(month, day, "저녁", data);
+    menuCard.innerHTML = printMenu(month, day, week, "저녁", data);
   });
 } else if (hour >= 8) {
   findMenuOfDate(month, day, "점심").then((data) => {
-    menuCard.innerHTML = printMenu(month, day, "점심", data);
+    menuCard.innerHTML = printMenu(month, day, week, "점심", data);
   });
 } else if (hour >= 0) {
   findMenuOfDate(month, day, "아침").then((data) => {
-    menuCard.innerHTML = printMenu(month, day, "아침", data);
+    menuCard.innerHTML = printMenu(month, day, week, "아침", data);
   });
 }
 
@@ -50,35 +51,35 @@ if (params.get("bus") !== null) {
   dest = params.get("bus");
 }
 
-let week;
+let weekday;
 if (date.getDay() >= 6) {
-  // week = "주말";
-  week = "평일";
+  // weekday = "주말";
+  weekday = "평일";
 } else {
-  week = "평일";
+  weekday = "평일";
 }
 
 if ((hour >= 19 && min >= 30) || hour >= 20) {
-  getBusFilter(week, "퇴근", "20", dest).then((x) => {
-    getBusFilter(week, "퇴근", "21", dest).then((y) => {
-      getBusFilter(week, "퇴근", "22", dest).then((z) => {
+  getBusFilter(weekday, "퇴근", "20", dest).then((x) => {
+    getBusFilter(weekday, "퇴근", "21", dest).then((y) => {
+      getBusFilter(weekday, "퇴근", "22", dest).then((z) => {
         const result = [];
         result.push(...x, ...y, ...z);
-        paintBusData(result, week, "퇴근", "21, 22, 23", dest);
+        paintBusData(result, weekday, "퇴근", "21, 22, 23", dest);
       });
     });
   });
 } else if ((hour >= 18 && min >= 30) || hour >= 19) {
-  getBusFilter(week, "퇴근", "19", dest).then((result) => {
-    paintBusData(result, week, "퇴근", "19", dest);
+  getBusFilter(weekday, "퇴근", "19", dest).then((result) => {
+    paintBusData(result, weekday, "퇴근", "19", dest);
   });
 } else if ((hour >= 17 && min >= 30) || hour >= 18) {
-  getBusFilter(week, "퇴근", "18", dest).then((result) => {
-    paintBusData(result, week, "퇴근", "18", dest);
+  getBusFilter(weekday, "퇴근", "18", dest).then((result) => {
+    paintBusData(result, weekday, "퇴근", "18", dest);
   });
 } else if (hour >= 12) {
-  getBusFilter(week, "퇴근", "17", dest).then((result) => {
-    paintBusData(result, week, "퇴근", "17", dest);
+  getBusFilter(weekday, "퇴근", "17", dest).then((result) => {
+    paintBusData(result, weekday, "퇴근", "17", dest);
   });
 }
 

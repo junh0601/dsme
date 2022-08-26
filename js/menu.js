@@ -1,5 +1,14 @@
+const menuFile = "./src/menu.json";
+
+export const fetchAllMenu = async () => {
+  const data = await fetch(menuFile);
+  const json = await data.json();
+  return json;
+};
+
+//메뉴찾기
 export const findMenuOfDate = async (month, date, time) => {
-  const data = await fetch("./src/menu.json");
+  const data = await fetch(menuFile);
   const json = await data.json();
   let result;
   json.forEach((list) => {
@@ -12,8 +21,9 @@ export const findMenuOfDate = async (month, date, time) => {
   return result;
 };
 
-export const printMenu = (m, d, time, data) => {
-  let text = `<header><i class="fa-solid fa-utensils"></i> ${m}/${d} ${time} 식단</header><figure class="grid"><table><tr>`;
+//메뉴 텍스트로 출력 (식사단위)
+export const printMenu = (m, d, w, time, data) => {
+  let text = `<header><i class="fa-solid fa-utensils"></i> ${m}/${d}(${w}) ${time} 식단</header><figure class="grid"><table><tr>`;
   let entireMenu = "";
   for (const key in data) {
     let m = "";

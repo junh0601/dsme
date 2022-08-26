@@ -1,5 +1,21 @@
 import { csvParser } from "./domParser.js";
 
+const busFile = "./src/busTable.csv";
+//버스 필터
+export const getBusFilter = async (week, leave, hour, destination) => {
+  const data = await fetch(busFile);
+  const text = await data.text();
+  const csv = csvParser(text);
+  const filter = [];
+  csv.forEach((row) => {
+    //평주,구분,시간,분,출발
+    if (row[0] === week && row[1] === leave && String(row[2]) === hour && row[5] === destination) {
+      filter.push(row);
+    }
+  });
+  return filter;
+};
+
 //버스 출력
 export const paintBusData = (filteredData, week, leave, hour, destination) => {
   const article = document.createElement("article");
@@ -22,19 +38,4 @@ export const paintBusData = (filteredData, week, leave, hour, destination) => {
   innerTable += "</tbody></table><div>";
   article.innerHTML = innerTable;
   cards.prepend(article);
-};
-
-//버스 알림 노출
-export const getBusFilter = async (week, leave, hour, destination) => {
-  const data = await fetch("./src/neungpo.csv");
-  const text = await data.text();
-  const csv = csvParser(text);
-  const filter = [];
-  csv.forEach((row) => {
-    //평주,구분,시간,분,출발
-    if (row[0] === week && row[1] === leave && String(row[2]) === hour && row[5] === destination) {
-      filter.push(row);
-    }
-  });
-  return filter;
 };

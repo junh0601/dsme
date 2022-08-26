@@ -1,0 +1,25 @@
+tr {
+  display: flex;
+  align-items: flex-start;
+}
+
+td {
+  min-width: 100px;
+}
+
+.menu-card > div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu-card > figure > table > tbody > tr > td {
+  width: 200px;
+}
+
+#title {
+  font-size: larger;
+}
+
+small {
+  opacity: 0.7;
+}
