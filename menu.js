@@ -1,5 +1,5 @@
 export const findMenuOfDate = async (month, date, time) => {
-  const data = await fetch("./src/menu.json");
+  const data = await fetch("./menu.json");
   const json = await data.json();
   let result;
   json.forEach((list) => {
