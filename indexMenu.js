@@ -6,9 +6,9 @@ const title = document.querySelector("#title");
 
 const date = new Date();
 
-const day = date.getDate();
 const hour = date.getHours();
 const min = date.getMinutes();
+const day = date.getDate();
 const month = date.getMonth() + 1;
 const week = ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
 
