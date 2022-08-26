@@ -61,14 +61,16 @@ def get_menu_table(soup, col, row):
             return soup
 # 결과 출력
 
+
 soup= get_menu_soup()
-finalResult = []
-for i in range(7):
-    for j in [1,2,3]:
-        finalResult.append(get_menu_table(soup,j,i))
+if soup["is_error"] != True  :
+    finalResult = []
+    for i in range(7):
+        for j in [1,2,3]:
+            finalResult.append(get_menu_table(soup,j,i))
 
 
 
-with open(os.path.join(BASE_DIR, 'src/menu.json'), 'w+',
-          encoding='utf-8') as json_file:
-    json.dump(finalResult, json_file, ensure_ascii=False, indent='\t')
+    with open(os.path.join(BASE_DIR, 'src/menu.json'), 'w+',
+            encoding='utf-8') as json_file:
+        json.dump(finalResult, json_file, ensure_ascii=False, indent='\t')
