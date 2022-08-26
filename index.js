@@ -1,12 +1,6 @@
-import { getWeatherData } from "./weather.js";
-import { csvParser } from "./domParser.js";
-import { findMenuOfDate, printMenu } from "./menu.js";
-
-const url = new URL("https://junh0601.github.io/dsme/?bus=hi");
-const params = url.searchParams;
-
-console.log(url);
-console.log(params.get("bus"));
+import { getWeatherData } from "./js/weather.js";
+import { findMenuOfDate, printMenu } from "./js/menu.js";
+import { getBusFilter, paintBusData } from "./js/bus.js";
 
 const searchForm = document.querySelector("#search-form");
 const lastupdate = document.getElementById("lastupdate");
@@ -20,7 +14,6 @@ const day = date.getDate();
 const hour = date.getHours();
 const min = date.getMinutes();
 const month = date.getMonth() + 1;
-console.log(month, day);
 
 // 메뉴 출력
 if (hour >= 19) {
@@ -48,48 +41,16 @@ getWeatherData({ mode: "lastUpdate" }).then((data) => {
   lastupdate.ariaBusy = "false";
 });
 
-//버스 알림 노출
-const getBusFilter = async (week, leave, hour, destination) => {
-  const data = await fetch("./src/neungpo.csv");
-  const text = await data.text();
-  const csv = csvParser(text);
-  const filter = [];
-  csv.forEach((row) => {
-    //평주,구분,시간,분,출발
-    if (row[0] === week && row[1] === leave && String(row[2]) === hour && row[5] === destination) {
-      filter.push(row);
-    }
-  });
-  return filter;
-};
+//파라미터 읽기
+const currentUrl = window.location.href;
+const url = new URL(currentUrl);
+const params = url.searchParams;
+let dest = "능포"; //현재 기본값
+if (params.get("bus") !== null) {
+  dest = params.get("bus");
+}
 
-const paintBusData = (filteredData, week, leave, hour, destination) => {
-  const article = document.createElement("article");
-  article.id = "bus-card";
-  article.style = "order:1";
-
-  //필터된 버스 출력
-  let innerTable = `<header>
-  <i class="fa-solid fa-bus"></i>
-  ${week} ${leave} ${hour}시대 ${destination}행 버스 알림</header><div>
-  <table><thead><tr><td>시</td><td>분</td><td>출발지</td></tr></thead><tbody>`;
-  filteredData.forEach((list) => {
-    const tr = `<tr>
-        <td class="td-narrow">${list[2]}</td>
-        <td class="td-narrow">${list[3]}</td>
-        <td>${list[4]}</td>
-    </tr>`;
-    innerTable += tr;
-  });
-  innerTable += "</tbody></table><div>";
-  article.innerHTML = innerTable;
-  cards.prepend(article);
-};
-
-//버스 알림 조건 타이머
-const dest = "능포"; //현재 기본값
 let week;
-
 if (date.getDay() >= 6) {
   // week = "주말";
   week = "평일";
