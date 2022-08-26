@@ -23,9 +23,7 @@ const appendMenuFooter = () => {
 };
 
 // 메뉴 출력
-if (hour >= 19) {
-  menuCard.innerHTML = ``;
-} else if (hour >= 13) {
+if (hour >= 13) {
   findMenuOfDate(month, day, "저녁").then((data) => {
     menuCard.innerHTML = printMenu(month, day, week, "저녁", data);
     appendMenuFooter();
