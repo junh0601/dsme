@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 tr {
   display: flex;
   align-items: flex-start;

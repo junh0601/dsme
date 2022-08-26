@@ -26,6 +26,10 @@ td {
 #menu-card > figure {
   overflow: auto;
 }
+#menu-card > footer {
+  display: flex;
+  justify-content: right;
+}
 
 #logo {
   text-decoration: none;

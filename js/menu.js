@@ -23,7 +23,8 @@ export const findMenuOfDate = async (month, date, time) => {
 
 //메뉴 텍스트로 출력 (식사단위)
 export const printMenu = (m, d, w, time, data) => {
-  let text = `<header><i class="fa-solid fa-utensils"></i> ${m}/${d}(${w}) ${time} 식단</header><figure class="grid"><table><tr>`;
+  let text = `<header><i class="fa-solid fa-utensils"></i> ${m}/${d}(${w}) ${time} 식단</a></header>
+  <figure class="grid"><table><tr>`;
   let entireMenu = "";
   for (const key in data) {
     let m = "";

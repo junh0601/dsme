@@ -16,20 +16,29 @@ const min = date.getMinutes();
 const month = date.getMonth() + 1;
 const week = ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
 
+const appendMenuFooter = () => {
+  const menuCardFooter = document.createElement("footer");
+  menuCardFooter.innerHTML = `<small><a href="./menu.html">식단 전체보기</a></small>`;
+  menuCard.appendChild(menuCardFooter);
+};
+
 // 메뉴 출력
 if (hour >= 19) {
   menuCard.innerHTML = ``;
 } else if (hour >= 13) {
   findMenuOfDate(month, day, "저녁").then((data) => {
     menuCard.innerHTML = printMenu(month, day, week, "저녁", data);
+    appendMenuFooter();
   });
 } else if (hour >= 8) {
   findMenuOfDate(month, day, "점심").then((data) => {
     menuCard.innerHTML = printMenu(month, day, week, "점심", data);
+    appendMenuFooter();
   });
 } else if (hour >= 0) {
   findMenuOfDate(month, day, "아침").then((data) => {
     menuCard.innerHTML = printMenu(month, day, week, "아침", data);
+    appendMenuFooter();
   });
 }
 
