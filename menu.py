@@ -26,14 +26,9 @@ def get_menu_soup():
 def get_menu_table(soup, col, row):
     if soup["is_error"]:
         return soup
-    elif not col in [1,2,3,4]:
-        print("잘못된 시간대입니다.")
-        soup = {"is_error" : True, "error_msg" : "잘못된 시간대입니다."}
-        return soup
     else:
         #col열-row행 테이블 요소 찾기
         try:
-            print(soup)
             mainContent = soup.find("div", id="mainContent", class_="prnews")
             food_sch = mainContent.find("div", class_="food_sch")
             table = food_sch.find("table", recursive=False)
@@ -64,9 +59,16 @@ def get_menu_table(soup, col, row):
             print("soup 추출 에러.")
             soup = {"is_error" : True, "error_msg" : "soup 추출 에러"}
             return soup
+# 결과 출력
 
-rslt = get_menu_table(get_menu_soup(),1,0)
+soup= get_menu_soup()
+finalResult = []
+for i in range(7):
+    for j in [1,2,3]:
+        finalResult.append(get_menu_table(soup,j,i))
 
-with open(os.path.join(BASE_DIR, 'menu.json'), 'w+',
+
+
+with open(os.path.join(BASE_DIR, 'src/menu.json'), 'w+',
           encoding='utf-8') as json_file:
-    json.dump(rslt, json_file, ensure_ascii=False, indent='\t')
+    json.dump(finalResult, json_file, ensure_ascii=False, indent='\t')

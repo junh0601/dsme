@@ -4,7 +4,7 @@ tr {
 }
 
 td {
-  min-width: 100px;
+  min-width: 200px;
 }
 
 #search-form {
@@ -21,6 +21,10 @@ td {
 #cards {
   display: flex;
   flex-direction: column;
+}
+
+#menu-card > figure {
+  overflow: auto;
 }
 
 #logo {

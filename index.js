@@ -1,12 +1,37 @@
 import { getWeatherData } from "./weather.js";
 import { csvParser } from "./domParser.js";
+import { findMenuOfDate, printMenu } from "./menu.js";
 
 const searchForm = document.querySelector("#search-form");
 const lastupdate = document.getElementById("lastupdate");
 const div = document.createElement("div");
 const small = document.createElement("small");
+const menuCard = document.getElementById("menu-card");
 
 const date = new Date();
+
+const day = date.getDate();
+const hour = date.getHours();
+const min = date.getMinutes();
+const month = date.getMonth() + 1;
+console.log(month, day);
+
+// 메뉴 출력
+if (hour >= 19) {
+  menuCard.innerHTML = ``;
+} else if (hour >= 13) {
+  findMenuOfDate(month, day, "저녁").then((data) => {
+    menuCard.innerHTML = printMenu(month, day, "저녁", data);
+  });
+} else if (hour >= 8) {
+  findMenuOfDate(month, day, "점심").then((data) => {
+    menuCard.innerHTML = printMenu(month, day, "점심", data);
+  });
+} else if (hour >= 0) {
+  findMenuOfDate(month, day, "아침").then((data) => {
+    menuCard.innerHTML = printMenu(month, day, "아침", data);
+  });
+}
 
 // 온도 측정
 getWeatherData({ mode: "lastUpdate" }).then((data) => {
@@ -58,9 +83,6 @@ const paintBusData = (filteredData, week, leave, hour, destination) => {
 //버스 알림 조건 타이머
 const dest = "능포"; //현재 기본값
 let week;
-const hour = date.getHours();
-const min = date.getMinutes();
-const month = date.getMonth() + 1;
 
 if (date.getDay() >= 6) {
   // week = "주말";
