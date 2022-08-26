@@ -40,11 +40,6 @@ article > header {
   font-weight: bold;
 }
 
-#bus-card > div {
-  overflow: auto;
-  max-height: 300px;
-}
-
 #menu-card > figure > table > tbody > tr > td {
   width: 200px;
 }
@@ -52,4 +47,9 @@ article > header {
 #notice-card > header {
   display: flex;
   justify-content: space-between;
+}
+
+#menu-card > div {
+  display: flex;
+  justify-content: space-around;
 }

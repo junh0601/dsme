@@ -30,5 +30,5 @@ export const printMenu = (m, d, time, data) => {
     entireMenu += oneMenu;
   }
 
-  return (text = text + entireMenu + "</tr></table></figure>");
+  return (text = text + entireMenu + "</tr></table></figure><div><i class='fa-solid fa-angles-left'></i><i class='fa-solid fa-angles-right'></i></div>");
 };
