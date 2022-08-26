@@ -2,10 +2,11 @@ import { getWeatherData } from "./weather.js";
 import { csvParser } from "./domParser.js";
 import { findMenuOfDate, printMenu } from "./menu.js";
 
-const url = new URL(window.location.href);
+const url = new URL("https://junh0601.github.io/dsme/?bus=hi");
 const params = url.searchParams;
+
 console.log(url);
-console.log(params);
+console.log(params.get("bus"));
 
 const searchForm = document.querySelector("#search-form");
 const lastupdate = document.getElementById("lastupdate");
@@ -65,7 +66,7 @@ const getBusFilter = async (week, leave, hour, destination) => {
 const paintBusData = (filteredData, week, leave, hour, destination) => {
   const article = document.createElement("article");
   article.id = "bus-card";
-  article.style = "order:-1";
+  article.style = "order:1";
 
   //필터된 버스 출력
   let innerTable = `<header>
@@ -114,7 +115,7 @@ if ((hour >= 19 && min >= 30) || hour >= 20) {
   getBusFilter(week, "퇴근", "18", dest).then((result) => {
     paintBusData(result, week, "퇴근", "18", dest);
   });
-} else if ((hour >= 16 && min >= 30) || hour >= 17) {
+} else if (hour >= 12) {
   getBusFilter(week, "퇴근", "17", dest).then((result) => {
     paintBusData(result, week, "퇴근", "17", dest);
   });
