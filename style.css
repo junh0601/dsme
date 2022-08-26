@@ -17,6 +17,7 @@ td {
   margin-bottom: 0;
   margin-top: 0;
 }
+
 #cards {
   display: flex;
   flex-direction: column;
