@@ -1,5 +1,6 @@
 import { csvParser } from "./domParser.js";
 
+export const busUpdate = "2022-08-28";
 const busFile = "./src/busTable.csv";
 const date = new Date();
 
@@ -52,7 +53,14 @@ export const paintBusData = (filteredData, week, leave, hour, destination) => {
 
     innerTable += tr;
   });
-  innerTable += "</tbody></table><small><ins>녹색 글씨</ins> 노선은 출발지에서 출발했습니다.</small></center><div>";
+  innerTable += `</tbody></table></center></div>`;
+  const footer = `<footer><small>
+                  <ul>
+                  <li><ins>녹색 글씨</ins> 노선은 출발지에서 출발했습니다.</li>
+                  <li>평일에 토요일 노선이 적용되는 경우가 있으니 사내공지를 확인바랍니다.</li>
+                  <li>노선 업데이트일 : ${busUpdate}</li>
+                  </ul></small></footer>`;
+  innerTable += footer;
   article.innerHTML = innerTable;
   cards.prepend(article);
 };
