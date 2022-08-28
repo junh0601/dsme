@@ -7,6 +7,7 @@ const lastupdate = document.getElementById("lastupdate");
 const div = document.createElement("div");
 const small = document.createElement("small");
 const menuCard = document.getElementById("menu-card");
+const entireBusBtn = document.querySelector("#entire-bus-btn");
 
 const date = new Date();
 
