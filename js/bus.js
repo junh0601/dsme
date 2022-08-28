@@ -6,6 +6,7 @@ const date = new Date();
 const hh = date.getHours();
 const mm = date.getMinutes();
 const dd = date.getDate();
+
 //버스 필터
 export const getBusFilter = async (week, leave, hour, destination) => {
   const data = await fetch(busFile);
@@ -35,7 +36,7 @@ export const paintBusData = (filteredData, week, leave, hour, destination) => {
     <table><thead><tr><td>시</td><td>분</td><td>출발지</td></tr></thead><tbody>`;
   filteredData.forEach((list) => {
     let tr;
-    if (hh >= parseInt(list[2]) && mm >= parseInt(list[3])) {
+    if ((hh >= parseInt(list[2]) && mm >= parseInt(list[3])) || hh > parseInt(list[2])) {
       tr = `<tr>
           <td class="td-narrow"><ins>${list[2]}</ins></td>
           <td class="td-narrow"><ins>${list[3]}</ins></td>
