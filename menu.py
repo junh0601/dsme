@@ -1,6 +1,5 @@
 from requests import get
 from bs4 import BeautifulSoup
-from pprint import pprint
 import json
 import re 
 import os
@@ -20,7 +19,6 @@ def get_menu_soup():
         soup = BeautifulSoup(request.text, "html.parser")
         soup["is_error"] = False
         return soup
-
 
 # get_menu_table(soup, 1조|2중|3식, n일뒤의 식단(0:오늘))
 def get_menu_table(soup, col, row):
@@ -61,14 +59,13 @@ def get_menu_table(soup, col, row):
             return soup
 # 결과 출력
 
-
 soup= get_menu_soup()
+
 if soup["is_error"] != True  :
     finalResult = []
     for i in range(7):
         for j in [1,2,3]:
             finalResult.append(get_menu_table(soup,j,i))
-
 
 
     with open(os.path.join(BASE_DIR, 'src/menu.json'), 'w+',
