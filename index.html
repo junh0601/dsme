@@ -26,6 +26,7 @@
         </li>
       </ul>
     </nav>
+
     <!-- searchbar -->
     <form id="search-form">
       <input type="search" name="keyword" placeholder="구글 검색" autocomplete="off" />
@@ -34,6 +35,17 @@
       <center><small><div>현재 시간에 따라 알맞은 카드가 제시됩니다.</small></center>
     </article>
     
+    <div class="link-bar">
+      <span class="link-bar_btn"><a href="https://weather.naver.com/today"  target="_blank">날씨</a></span>
+      <span class="link-bar_btn"><a href="https://www.naver.com" target="_blank">네이버</a></span>
+      <span class="link-bar_btn"><a href="https://google.com" target="_blank">구글</a></span>
+      <span class="link-bar_btn"><a href="http://m.welliv.co.kr/mobile/mealmenu_list.jsp" target="_blank">웰리브 식단</a></span>
+      <span class="link-bar_btn"><a href="http://www.kma.go.kr/cgi-bin/aws/nph-aws_txt_min?0&0&MINDB_01M&294&a" target="_blank">기상청 관측데이터</a></span>
+      <span class="link-bar_btn"><a href="https://www.dsme.co.kr/" target="_blank">DSME</a></span>
+      <span class="link-bar_btn"><a href="https://partners.dsme.co.kr/" target="_blank">협력사 포털</a></span>
+
+    </div>
+
    <!-- cards -->
     <div id="cards" class="grid" style="order: 0">
       <!-- 식단카드 -->
@@ -43,8 +55,9 @@
 
       <!-- 기온카드 -->
         <article style="order: 2">
-          <header><i class="fa-solid fa-temperature-high"></i> 현재 기온</header>
-          <div id="lastupdate" aria-busy="true"></div>
+          <header><i class="fa-solid fa-temperature-high"></i> 현재 날씨</header>
+          <div id="weather-container" aria-busy="true"></div>
+          <footer><small>날씨 출처 <a href="https://openweathermap.org/">Open Weather</a></small></footer> 
         </article>
         
         <details class="secondary" id="notice-card" style="order: 99">

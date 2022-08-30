@@ -57,3 +57,28 @@ article > header {
 i {
   margin-right: 5px;
 }
+
+.link-bar {
+  margin-top: 15px;
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+}
+
+.link-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.link-bar_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  background-color: #18232c;
+  color: white;
+  font-size: 15px;
+  border-radius: 10px;
+  margin-right: 10px;
+  padding: 5px 10px;
+}

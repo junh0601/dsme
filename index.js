@@ -1,11 +1,10 @@
 import { getWeatherData } from "./js/weather.js";
 import { findMenuOfDate, printMenu } from "./js/menu.js";
 import { getBusFilter, paintBusData } from "./js/bus.js";
+import { getOpenWeatherData } from "./js/openWeather.js";
 
 const searchForm = document.querySelector("#search-form");
-const lastupdate = document.getElementById("lastupdate");
-const div = document.createElement("div");
-const small = document.createElement("small");
+const weatherContainer = document.getElementById("weather-container");
 const menuCard = document.getElementById("menu-card");
 const entireBusBtn = document.querySelector("#entire-bus-btn");
 
@@ -42,12 +41,21 @@ if (hour >= 13) {
 }
 
 // 온도 측정
-getWeatherData({ mode: "lastUpdate" }).then((data) => {
-  div.innerHTML = `현재 기온은 <mark>${data[8]}℃</mark>입니다.`;
-  small.innerHTML = `${data[0]}시에 마지막 업데이트. 옥포조선소 기준 <a class="contrast" href="http://www.kma.go.kr/cgi-bin/aws/nph-aws_txt_min?0&0&MINDB_01M&294&a">(더보기)</a>`;
-  lastupdate.appendChild(div);
-  lastupdate.appendChild(small);
-  lastupdate.ariaBusy = "false";
+getOpenWeatherData().then((json) => {
+  const ul = document.createElement("ul");
+  console.log(json);
+  const { temp, feels_like, humidity } = json.main;
+  const weatherIcon = `http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
+  const wind = json.wind.speed;
+  let mainText = `
+  <hgroup>
+  <h1><img src="${weatherIcon}" width="45px"/>${Math.round(temp)}°C</h1>
+  <div><small>풍속</small> ${wind} m/s</div>
+  <div><small>습도</small> ${humidity} %</div>
+  </hgroup>`;
+  ul.innerHTML = mainText;
+  weatherContainer.appendChild(ul);
+  weatherContainer.ariaBusy = "false";
 });
 
 //파라미터 읽기
