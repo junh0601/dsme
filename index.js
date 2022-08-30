@@ -43,13 +43,13 @@ if (hour >= 13) {
 // 온도 측정
 getOpenWeatherData().then((json) => {
   const ul = document.createElement("ul");
-  console.log(json);
   const { temp, feels_like, humidity } = json.main;
   const weatherIcon = `http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
   const wind = json.wind.speed;
   let mainText = `
   <hgroup>
   <h1><img src="${weatherIcon}" width="45px"/>${Math.round(temp)}°C</h1>
+  <div><small>체감온도</small> ${feels_like} °C</div>
   <div><small>풍속</small> ${wind} m/s</div>
   <div><small>습도</small> ${humidity} %</div>
   </hgroup>`;

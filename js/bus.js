@@ -39,9 +39,9 @@ export const paintBusData = (filteredData, week, leave, hour, destination) => {
     let tr;
     if ((hh >= parseInt(list[2]) && mm >= parseInt(list[3])) || hh > parseInt(list[2])) {
       tr = `<tr>
-          <td class="td-narrow"><ins>${list[2]}</ins></td>
-          <td class="td-narrow"><ins>${list[3]}</ins></td>
-          <td><ins>${list[4]}</ins></td>
+          <td class="td-narrow"><b><ins>${list[2]}</ins></b></td>
+          <td class="td-narrow"><b><ins>${list[3]}</ins></b></td>
+          <td><b><ins>${list[4]}</ins></b></td>
         </tr>`;
     } else {
       tr = `<tr>
