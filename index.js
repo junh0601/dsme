@@ -147,3 +147,6 @@ const handleSearch = (event) => {
 };
 
 searchForm.addEventListener("submit", handleSearch);
+
+const regex = new RegExp(/.jpg/);
+console.log("text.jpg".match(regex));
