@@ -114,7 +114,7 @@ if (hour === 12 && month >= 4 && month <= 10) {
       let msg = "";
       if (parseFloat(data[0]) >= 31.5) {
         msg = "1시간 연장입니다.";
-      } else if (parseFloat(data[0]) > 28) {
+      } else if (parseFloat(data[0]) >= 28) {
         msg = "30분 연장입니다.";
       } else {
         msg = "연장이 아닙니다.";
