@@ -102,19 +102,19 @@ if ((hour >= 19 && min >= 45) || hour >= 20) {
 }
 
 // 정오 연장 알림 (4~10월 사이에만 작동)
-if (hour === 12 && month >= 4 && month <= 10) {
+if (hour === 12 && min >= 3 && month >= 4 && month <= 10) {
   const article = document.createElement("article");
   const cards = document.getElementById("cards");
   article.style = "order:-2;";
   article.innerHTML = ` 점심 시간 연장 여부 조회중`;
   article.ariaBusy = "true";
   cards.appendChild(article);
-  getWeatherData({ mode: "check", value: "12:00" }).then((data) => {
+  getWeatherData({ mode: "check", value: "19:00" }).then((data) => {
     if (data !== null) {
       let msg = "";
-      if (parseFloat(data[0]) >= 31.5) {
+      if (parseFloat(data[8]) >= 31.5) {
         msg = "1시간 연장입니다.";
-      } else if (parseFloat(data[0]) >= 28) {
+      } else if (parseFloat(data[8]) >= 28) {
         msg = "30분 연장입니다.";
       } else {
         msg = "연장이 아닙니다.";
@@ -127,7 +127,7 @@ if (hour === 12 && month >= 4 && month <= 10) {
             <div><i class="fa-solid fa-info"></i> 연장 기준은 28도 이상은 30분 연장, 31.5도 이상은 1시간 연장 (12시 정각 온도)</div>
             <div>
               <i class="fa-solid fa-info"></i> <a href="http://www.kma.go.kr/cgi-bin/aws/nph-aws_txt_min?0&0&MINDB_01M&294&a" class="contrast" target="_blank">공공데이터</a>를 기반으로 한 결과이며, 정확한 결과는
-              회사 공지를 확인해주세요.
+              <a href="https://partners.dsme.co.kr/" class="contrast"  target="_blank">사내 공지</a>를 확인해주세요.
             </div>
           </small>
         </footer>`;

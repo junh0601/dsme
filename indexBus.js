@@ -12,7 +12,7 @@ const date = new Date();
 
 const hh = date.getHours();
 const mm = date.getMinutes();
-const dd = date.getDate();
+const week = ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
 
 const handleSelectChange = async () => {
   const week = dropdown.value;
@@ -50,5 +50,12 @@ const handleSelectChange = async () => {
   busUpdateMsg.innerText = `마지막 업데이트일 : ${busUpdate}`;
 };
 
+if (week === "토") {
+  dropdown.value = "토요일";
+} else if (week === "일") {
+  dropdown.value = "일요일";
+} else {
+  dropdown.value = "평일";
+}
 handleSelectChange();
 dropdown.addEventListener("input", handleSelectChange);

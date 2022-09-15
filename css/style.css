@@ -62,8 +62,14 @@ i {
   margin-top: 15px;
   display: flex;
   overflow: auto;
-  white-space: nowrap;
   -ms-overflow-style: none;
+  white-space: nowrap;
+  position: relative;
+}
+
+.link-bar > .links {
+  display: flex;
+  margin-right: 30px;
 }
 
 .link-bar::-webkit-scrollbar {
