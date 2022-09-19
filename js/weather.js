@@ -2,7 +2,7 @@ import { getInnerTag } from "./domParser.js";
 
 // <mode>
 // "default" : 전부 출력
-// "lastcheck"  : 마지막 측정값 array
+// "lastUpdate"  : 마지막 측정값 array
 // "check" : 특정시간대 값 array 가져옴 , value에 "12:00" 형태의 값 필요
 //
 

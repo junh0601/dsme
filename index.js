@@ -1,7 +1,6 @@
 import { getWeatherData } from "./js/weather.js";
 import { findMenuOfDate, printMenu } from "./js/menu.js";
 import { getBusFilter, paintBusData } from "./js/bus.js";
-import { getOpenWeatherData } from "./js/openWeather.js";
 
 const searchForm = document.querySelector("#search-form");
 const weatherContainer = document.getElementById("weather-container");
@@ -41,17 +40,26 @@ if (hour >= 13) {
 }
 
 // 온도 측정
-getOpenWeatherData().then((json) => {
+getWeatherData({ mode: "lastUpdate", value: null }).then((data) => {
   const ul = document.createElement("ul");
-  const { temp, feels_like, humidity } = json.main;
-  const weatherIcon = `http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
-  const wind = json.wind.speed;
+  const lastestTemp = data[8];
+  const lastestUpdateTime = data[0];
+  const lastestRain15 = data[2];
+  const latestHum = data[15];
+  const latestWind = data[14];
+  let lastesWindDirection = data[13];
+  lastesWindDirection = lastesWindDirection.replace(/E/g, "동");
+  lastesWindDirection = lastesWindDirection.replace(/W/g, "서");
+  lastesWindDirection = lastesWindDirection.replace(/N/g, "북");
+  lastesWindDirection = lastesWindDirection.replace(/S/g, "남");
   let mainText = `
   <hgroup>
-  <h1><img src="${weatherIcon}" width="45px"/>${Math.round(temp)}°C</h1>
-  <div><small>체감온도</small> ${feels_like} °C</div>
-  <div><small>풍속</small> ${wind} m/s</div>
-  <div><small>습도</small> ${humidity} %</div>
+  <h1>${lastestTemp}°C</h1>
+  <div><small>최근 관측시간</small> ${lastestUpdateTime}</div>
+  <div><small>강수량</small> ${lastestRain15} mm/15분</div>
+  <div><small>풍속</small> ${latestWind} m/s</div>
+  <div><small>풍향</small> ${lastesWindDirection} 방향</div>
+  <div><small>습도</small> ${latestHum} %</div>
   </hgroup>`;
   ul.innerHTML = mainText;
   weatherContainer.appendChild(ul);
@@ -138,15 +146,12 @@ if (hour === 12 && min >= 3 && month >= 4 && month <= 10) {
   });
 }
 
+// 검색창
 const handleSearch = (event) => {
   event.preventDefault();
   const searchbar = searchForm.querySelector("input:first-child");
-  console.log(searchbar.value);
-  window.open(`https://www.google.com/search?q=${searchbar.value}`);
+  window.open(`https://search.naver.com/search.naver?ie=UTF-8&query=${searchbar.value}&sm=chr_hty`);
   searchbar.value = "";
 };
 
 searchForm.addEventListener("submit", handleSearch);
-
-const regex = new RegExp(/.jpg/);
-console.log("text.jpg".match(regex));
