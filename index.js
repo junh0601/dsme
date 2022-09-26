@@ -117,7 +117,7 @@ if (hour === 12 && min >= 3 && month >= 4 && month <= 10) {
   article.innerHTML = ` 점심 시간 연장 여부 조회중`;
   article.ariaBusy = "true";
   cards.appendChild(article);
-  getWeatherData({ mode: "check", value: "19:00" }).then((data) => {
+  getWeatherData({ mode: "check", value: "12:00" }).then((data) => {
     if (data !== null) {
       let msg = "";
       if (parseFloat(data[8]) >= 31.5) {
