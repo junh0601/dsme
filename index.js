@@ -109,8 +109,8 @@ if ((hour >= 19 && min >= 45) || hour >= 20) {
   });
 }
 
-// 정오 연장 알림 (4~10월 사이에만 작동)
-if (hour === 12 && month >= 4 && month <= 10) {
+// 정오 연장 알림
+if (hour === 12) {
   const article = document.createElement("article");
   const cards = document.getElementById("cards");
   article.style = "order:-2;";
@@ -140,7 +140,7 @@ if (hour === 12 && month >= 4 && month <= 10) {
           </small>
         </footer>`;
     } else {
-      article.innerHTML = "점심 연장 여부가 아직 조회되지 않습니다.";
+      article.innerHTML = "점심 연장 여부가 아직 조회되지 않습니다. (12시 정각의 기온은 대략 12:04분에 발표됩니다)";
     }
     article.ariaBusy = "false";
   });
