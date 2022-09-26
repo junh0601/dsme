@@ -110,7 +110,7 @@ if ((hour >= 19 && min >= 45) || hour >= 20) {
 }
 
 // 정오 연장 알림 (4~10월 사이에만 작동)
-if (hour === 12 && min >= 3 && month >= 4 && month <= 10) {
+if (hour === 12 && month >= 4 && month <= 10) {
   const article = document.createElement("article");
   const cards = document.getElementById("cards");
   article.style = "order:-2;";
