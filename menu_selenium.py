@@ -7,8 +7,15 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--headless")
+
+# linux 환경에서 필요한 option
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+
 def get_menu_soup():
-    browser = webdriver.Chrome(ChromeDriverManager().install())
+    browser = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
     url = "http://m.welliv.co.kr/mobile/mealmenu_list.jsp"
     soup=None;
     try:
