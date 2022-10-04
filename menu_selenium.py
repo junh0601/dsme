@@ -64,6 +64,7 @@ def get_menu_table(soup, col, row):
 # 결과 출력
 
 soup= get_menu_soup()
+print(soup)
 if soup["is_error"] != True  :
     finalResult = []
     for i in range(7):
