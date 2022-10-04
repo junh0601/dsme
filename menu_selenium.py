@@ -1,4 +1,5 @@
-from requests import get
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import json
 import re 
@@ -7,16 +8,18 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def get_menu_soup():
+    browser = webdriver.Chrome(ChromeDriverManager().install())
     url = "http://m.welliv.co.kr/mobile/mealmenu_list.jsp"
     soup=None;
     try:
-        request = get(url, timeout=(1, 27))
+        browser.get(url)
     except:
         print("🚨Didn't request from URL")
         error = {"is_error" : True, "error_msg" : "🚨Didn't request from URL"}
         return error
     else:
-        soup = BeautifulSoup(request.text, "html.parser")
+        source = browser.page_source
+        soup = BeautifulSoup(source, "html.parser")
         soup["is_error"] = False
         return soup
 
@@ -30,7 +33,8 @@ def get_menu_table(soup, col, row):
             mainContent = soup.find("div", id="mainContent", class_="prnews")
             food_sch = mainContent.find("div", class_="food_sch")
             table = food_sch.find("table", recursive=False)
-            rows = table.find_all("tr", recursive=False)
+            tbody = table.find("tbody", recursive=False)
+            rows = tbody.find_all("tr", recursive=False)
             if len(rows)<=(row+1):
                 print("더이상 표시할 수 없는 날짜입니다.")
                 return 
@@ -60,7 +64,6 @@ def get_menu_table(soup, col, row):
 # 결과 출력
 
 soup= get_menu_soup()
-print(soup.find("table"))
 if soup["is_error"] != True  :
     finalResult = []
     for i in range(7):
@@ -68,6 +71,8 @@ if soup["is_error"] != True  :
             finalResult.append(get_menu_table(soup,j,i))
 
 
-    with open(os.path.join(BASE_DIR, 'src/menu.json'), 'w+',
+    with open(os.path.join(BASE_DIR, 'src/menu_selenium.json'), 'w+',
             encoding='utf-8') as json_file:
         json.dump(finalResult, json_file, ensure_ascii=False, indent='\t')
+
+
