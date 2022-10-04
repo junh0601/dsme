@@ -35,7 +35,7 @@ jobs:
         run: |
           git config --local user.email "junh0601@naver.com"
           git config --local user.name "dsme_junh0601"
-          git add news.json
+          git add menu_selenium.json
           git commit -m "Auto - Update data with Scraping"
       - name: Push
         uses: ad-m/github-push-action@master
