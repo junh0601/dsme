@@ -65,6 +65,7 @@ i {
   -ms-overflow-style: none;
   white-space: nowrap;
   position: relative;
+  align-items: center;
 }
 
 .link-bar > .links {

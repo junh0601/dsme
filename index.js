@@ -146,12 +146,3 @@ if (hour === 12) {
   });
 }
 
-// 검색창
-const handleSearch = (event) => {
-  event.preventDefault();
-  const searchbar = searchForm.querySelector("input:first-child");
-  window.open(`https://search.naver.com/search.naver?ie=UTF-8&query=${searchbar.value}&sm=chr_hty`);
-  searchbar.value = "";
-};
-
-searchForm.addEventListener("submit", handleSearch);
