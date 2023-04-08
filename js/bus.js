@@ -1,6 +1,6 @@
 import { csvParser } from "./domParser.js";
 
-export const busUpdate = "2022-08-28";
+export const busUpdate = "2023-04-08";
 const busFile = "./src/busTable.csv";
 const date = new Date();
 
