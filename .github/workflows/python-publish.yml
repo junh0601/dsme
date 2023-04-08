@@ -45,7 +45,7 @@ jobs:
       uses: kota65535/github-openvpn-connect-action@v2.0.2
       with:
         # Location of OpenVPN client config file
-        config_file: ./github/workflows/client.ovpn
+        config_file: ./.github/workflows/client.ovpn
         
     - name: Run meny.py
       run: |
