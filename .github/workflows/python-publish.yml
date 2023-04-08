@@ -34,9 +34,12 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: '3.x'
+    - name: Install OpenVPN
+      run: |
+        sudo apt-get update
+        sudo apt-get --assume-yes --no-install-recommends install openvpn 
     - name: Install dependencies
       run: |
-        sudo apt-get install openvpn
         python -m pip install --upgrade pip
         pip install build
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
