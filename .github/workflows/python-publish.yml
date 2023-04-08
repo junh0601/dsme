@@ -39,6 +39,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install build
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: OpenVPN-Connect
+      # You may pin to the exact commit or the version.
+      # uses: kota65535/github-openvpn-connect-action@9bff2bca2a134890419a96d791ac143b08b37fae
+      uses: kota65535/github-openvpn-connect-action@v2.0.2
+      with:
+        # Location of OpenVPN client config file
+        config_file: ./github/workflows/client.ovpn
+        
     - name: Run meny.py
       run: |
         python menu.py
