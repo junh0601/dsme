@@ -17,7 +17,7 @@ const week = ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
 
 const appendMenuFooter = () => {
   const menuCardFooter = document.createElement("footer");
-  menuCardFooter.innerHTML = `<small><a href="./menu.html">식단 전체보기</a></small>`;
+  menuCardFooter.innerHTML = `<small><a href="./menu.html">식단 전체보기</a></small><br><small><a href="http://m.welliv.co.kr/mobile/mealmenu_list.jsp">웰리브 사이트 바로가기</a></small>`;
   menuCard.appendChild(menuCardFooter);
 };
 
