@@ -18,7 +18,6 @@ def get_menu_soup():
     else:
         soup = BeautifulSoup(request.text, "html.parser")
         soup["is_error"] = False
-        print(soup)
         return soup
 
 # get_menu_table(soup, 1조|2중|3식, n일뒤의 식단(0:오늘))
@@ -61,6 +60,7 @@ def get_menu_table(soup, col, row):
 # 결과 출력
 
 soup= get_menu_soup()
+print(soup)
 print(soup.find("table"))
 if soup["is_error"] != True  :
     finalResult = []
