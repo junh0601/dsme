@@ -1,4 +1,4 @@
-import { getWeatherData } from "./js/weather.js";
+
 import { findMenuOfDate, printMenu } from "./js/menu.js";
 import { getBusFilter, paintBusData } from "./js/bus.js";
 
