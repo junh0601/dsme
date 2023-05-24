@@ -39,33 +39,6 @@ if (hour >= 13) {
   });
 }
 
-// 온도 측정
-getWeatherData({ mode: "lastUpdate", value: null }).then((data) => {
-  const ul = document.createElement("ul");
-  const lastestTemp = data[8];
-  const lastestUpdateTime = data[0];
-  const lastestRain15 = data[2];
-  const latestHum = data[15];
-  const latestWind = data[14];
-  let lastesWindDirection = data[13];
-  lastesWindDirection = lastesWindDirection.replace(/E/g, "동");
-  lastesWindDirection = lastesWindDirection.replace(/W/g, "서");
-  lastesWindDirection = lastesWindDirection.replace(/N/g, "북");
-  lastesWindDirection = lastesWindDirection.replace(/S/g, "남");
-  let mainText = `
-  <hgroup>
-  <h1>${lastestTemp}°C</h1>
-  <div><small>최근 관측시간</small> ${lastestUpdateTime}</div>
-  <div><small>강수량</small> ${lastestRain15} mm/15분</div>
-  <div><small>풍속</small> ${latestWind} m/s</div>
-  <div><small>풍향</small> ${lastesWindDirection} 방향</div>
-  <div><small>습도</small> ${latestHum} %</div>
-  </hgroup>`;
-  ul.innerHTML = mainText;
-  weatherContainer.appendChild(ul);
-  weatherContainer.ariaBusy = "false";
-});
-
 //파라미터 읽기
 const currentUrl = window.location.href;
 const url = new URL(currentUrl);
