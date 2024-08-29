@@ -10,7 +10,9 @@ def get_menu_soup():
     url = "http://m.welliv.co.kr/mobile/mealmenu_list.jsp"
     soup=None;
     try:
-        request = get(url, timeout=(1, 27))
+        request = get(url, timeout=(1, 27), headers={
+            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+        })
     except:
         print("🚨Didn't request from URL")
         error = {"is_error" : True, "error_msg" : "🚨Didn't request from URL"}
