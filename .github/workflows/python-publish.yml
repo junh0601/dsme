@@ -39,9 +39,12 @@ jobs:
 
           git add src/menu.json
           git commit -m "Auto update menu.json" || echo "No changes to commit"
-
-          # 🔥 충돌 발생 시 자동 해결
+          
+          # 🔥 충돌 방지를 위해 최신 코드 가져오기
           git pull --rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/junh0601/dsme.git main || git rebase --abort
-          git reset --hard origin/main  # 원격 저장소 기준으로 덮어쓰기
-
+          
+          # 🔥 변경 사항 강제 푸시
           git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/junh0601/dsme.git HEAD:main
+      - name: Debug
+        run: |
+          git status
