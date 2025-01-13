@@ -36,6 +36,5 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add src/menu.json
           git commit -m "Auto update menu.json" || echo "No changes to commit"
+          git pull --rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/junh0601/dsme.git main
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/junh0601/dsme.git HEAD:main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
