@@ -34,17 +34,16 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "junh0601@naver.com"
-          git config --local user.name "Junhyeok Lee"
+          git config user.name "GitHub Actions"
+          git config user.email "junh0601@naver.com"
 
-          git add src/menu.json
+          git add .
           git commit -m "Auto update menu.json" || echo "No changes to commit"
           
           # 🔥 충돌 방지를 위해 최신 코드 가져오기
-          git pull --rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/junh0601/dsme.git main || git rebase --abort
+          git push https://${{ secrets.GH_TOKEN }}@github.com/junh0601/dsme.git 
           
-          # 🔥 변경 사항 강제 푸시
-          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/junh0601/dsme.git HEAD:main
+          
       - name: Debug
         run: |
           git status
