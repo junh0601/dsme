@@ -43,11 +43,11 @@ jobs:
       run: |
         python menu.py
     - name: Commit and push changes
-      run: |
-        git config --local user.email "junh0601@naver.com"
-        git config --local user.name "GitHub Actions"
-        git add .
-        git commit -m "Auto update scraped data" || echo "No changes to commit"
-        git push https://${{ secrets.GITHUB_TOKEN }}@github.com/junh0601/dsme.git HEAD:main
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "junh0601@naver.com"
+          git config --local user.name "GitHub Actions"
+          git add src/menu.json
+          git commit -m "Auto update menu.json" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/junh0601/dsme.git HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
