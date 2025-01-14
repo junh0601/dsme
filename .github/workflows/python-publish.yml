@@ -2,7 +2,7 @@ name: Run menu.py and Commit JSON
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # 매일 오전 9시 실행 (UTC 기준)
+    - cron: '0 0 * * *'  # 매일 오전 9시 실행 (KST 기준)
   workflow_dispatch:  # 수동 실행 가능
 
 permissions:
