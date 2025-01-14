@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import re 
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -63,15 +63,16 @@ soup = get_menu_soup()
 if soup["is_error"] != True:
     finalResult = []
 
-    # 업데이트된 날짜 추가
-    updated_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # 현재 시간을 한국 시간(KST, UTC+9)으로 변환하여 추가
+    updated_date = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
     finalResult.append({"updated_at": updated_date})
 
-    for i in range(7):
-        for j in [1, 2, 3]:
+    for i in range(7):  # 7일간의 데이터를 가져옴
+        for j in [1, 2, 3]:  # 조식, 중식, 석식
             menu = get_menu_table(soup, j, i)
             if menu:
                 finalResult.append(menu)
 
+    # JSON 파일 저장
     with open(os.path.join(BASE_DIR, 'src/menu.json'), 'w+', encoding='utf-8') as json_file:
         json.dump(finalResult, json_file, ensure_ascii=False, indent='\t')
