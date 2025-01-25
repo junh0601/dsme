@@ -63,10 +63,6 @@ soup = get_menu_soup()
 if soup["is_error"] != True:
     finalResult = []
 
-    # 현재 시간을 한국 시간(KST, UTC+9)으로 변환하여 추가
-    updated_date = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
-    finalResult.append({"updated_at": updated_date})
-
     for i in range(7):  # 7일간의 데이터를 가져옴
         for j in [1, 2, 3]:  # 조식, 중식, 석식
             menu = get_menu_table(soup, j, i)
