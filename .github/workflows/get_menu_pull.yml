@@ -1,0 +1,37 @@
+name: Daily Cafeteria Menu Collector
+
+on:
+  # 매일 오전 6시 (KST)
+  # GitHub Actions는 UTC 기준 → 21:00 UTC = 06:00 KST
+  schedule:
+    - cron: "0 21 * * *"
+
+  # 웹에서 직접 실행 버튼
+  workflow_dispatch:
+
+jobs:
+  collect-menu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install selenium beautifulsoup4 webdriver-manager
+
+      - name: Run menu collector
+        run: |
+          python get_menu_pull.py
+
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: menu-result
+          path: menu.txt
